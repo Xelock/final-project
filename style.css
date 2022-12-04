@@ -748,7 +748,7 @@ html {
       position: relative;
       transform: translateX(0%);
       box-shadow: none;
-      z-index: 3; }
+      z-index: 4; }
       .left-menu__header {
         justify-content: space-between; }
         .left-menu__header .left-menu__x {
