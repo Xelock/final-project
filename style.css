@@ -422,7 +422,8 @@ a {
 
 body {
   background-color: #F8F8F8;
-  position: relative; }
+  position: relative;
+  overflow-x: hidden; }
   @media (min-width: 1440px) {
     body {
       display: flex; } }
@@ -463,7 +464,7 @@ body {
     border-radius: 8px;
     font-family: inherit;
     font-weight: 500;
-    color: #7E7E82;
+    color: #7e7e82;
     margin-top: 0;
     margin-bottom: 16px; }
   .сallrequest__text {
@@ -503,49 +504,50 @@ body {
         .сallrequest__exit-modal .exit-modal__img {
           margin: 0; } }
 
-@media (min-width: 768px) {
-  .modal-callrequest {
-    border-left: 1px solid #41F6D7;
-    width: 440px; }
-  .сallrequest__exit-modal {
-    position: absolute;
-    right: 343px;
-    top: 12px;
-    margin-top: 20px; }
-  .сallrequest__title {
-    margin-top: 40px; } }
-
 .callrequest {
   position: absolute;
-  visibility: hidden;
-  width: 100%;
-  height: 100%; }
+  transform: translateX(200%);
+  width: 440px;
+  height: 100%;
+  transition: 0.5s;
+  right: 0; }
+  @media (max-width: 440px) {
+    .callrequest {
+      width: 320px; } }
 
 .callrequest--active {
-  position: absolute;
-  visibility: visible;
+  position: fixed;
   display: flex;
   height: 100%;
-  z-index: 100; }
+  z-index: 100;
+  transform: translateX(0%);
+  right: 0; }
 
 .modal-callrequest {
   position: absolute;
   right: 0;
   height: 100%;
-  z-index: 2; }
+  z-index: 2;
+  width: 440px; }
+  @media (max-width: 440px) {
+    .modal-callrequest {
+      width: 320px; } }
 
 .callrequest__overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  background: rgba(255, 255, 255, 0.96); }
+  height: 100vh;
+  width: 100vw;
+  z-index: 5;
+  background-color: rgba(255, 255, 255, 0.96);
+  display: none;
+  position: fixed; }
+
+.callrequest__overlay--on {
+  display: block; }
 
 .modal-callrequest {
   background-color: #FFFFFF;
   height: 100%;
   min-height: 676px;
-  width: 320px;
   box-shadow: 0px 0px 50px #aba9a9; }
 
 .modal-feedback {
@@ -637,29 +639,43 @@ body {
 
 .feedback {
   position: absolute;
-  visibility: hidden;
-  width: 100%;
-  height: 100%; }
+  transform: translateX(200%);
+  width: 440px;
+  height: 100%;
+  transition: 0.5s;
+  right: 0; }
+  @media (max-width: 440px) {
+    .feedback {
+      width: 320px; } }
 
 .feedback--active {
-  position: absolute;
-  visibility: visible;
+  position: fixed;
   display: flex;
   height: 100%;
-  z-index: 100; }
+  z-index: 100;
+  transform: translateX(0%);
+  right: 0; }
 
 .modal-feedback {
-  position: absolute;
+  position: fixed;
   right: 0;
   height: 100%;
-  z-index: 2; }
+  z-index: 10;
+  width: 440px; }
+  @media (max-width: 440px) {
+    .modal-feedback {
+      width: 320px; } }
 
 .overlayfeed {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  background: rgba(255, 255, 255, 0.96); }
+  height: 100vh;
+  width: 100vw;
+  z-index: 5;
+  background-color: rgba(255, 255, 255, 0.96);
+  display: none;
+  position: fixed; }
+
+.overlayfeed--on {
+  display: block; }
 
 .footer {
   display: flex;
@@ -764,8 +780,8 @@ html {
     @media (max-height: 767px) {
       .left-menu .left-menu__item {
         margin-bottom: 24px; } }
-    .left-menu .left-menu__item:hover {
-      color: #7E7E82; }
+  .left-menu .item--active {
+    opacity: 70%; }
   .left-menu .left-menu__footer {
     display: flex;
     flex-wrap: wrap;
@@ -792,8 +808,7 @@ html {
     color: #1B1C21;
     margin-bottom: 32px; }
     .left-menu .lang:first-child {
-      color: #7E7E82;
-      font-weight: 500; }
+      color: #7E7E82; }
     .left-menu .lang:last-child {
       margin-right: 0; }
 
@@ -1012,14 +1027,7 @@ html {
     .repair .none {
       display: flex; } }
 
-.repair .act-but {
-  display: flex;
-  align-items: center; }
-
-.repair .btn-show {
-  display: none; }
-
-.repair .button1 {
+.repair .repair__button--show {
   align-items: center; }
 
 .repair .btn {
@@ -1029,8 +1037,17 @@ html {
   padding-left: 24px;
   margin-bottom: 32px; }
 
-.repair .button2 svg {
-  margin-right: 14px; }
+.repair .repair__button--hide {
+  display: none; }
+  .repair .repair__button--hide svg {
+    margin-right: 14px; }
+
+.repair .btn--active {
+  display: flex;
+  align-items: center; }
+
+.repair .btn--hide {
+  display: none; }
 
 .repair__hide-content {
   font-weight: 500; }
@@ -1141,12 +1158,12 @@ html {
   padding-left: 24px;
   margin-bottom: 32px; }
 
-.technic .button3 {
+.technic .technic__button--show {
   align-items: center; }
 
-.technic .button4 {
+.technic .technic__button--hide {
   display: none; }
-  .technic .button4 svg {
+  .technic .technic__button--hide svg {
     margin-right: 14px; }
 
 .technic__hide-content {
